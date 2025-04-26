@@ -1,6 +1,8 @@
 # Information Visualization
 UNIST CSE468 Information Visualization
 
+<br>
+
 ## Contents
 
 - [Chocolate Sales Visualization](https://hoonably.github.io/information-visualization/assignment-1/)
