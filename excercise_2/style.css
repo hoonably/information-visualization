@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  #dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 20px;
+  }
+  
+  #area-chart, #bar-chart, #context-chart, #datatable {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: #f9f9f9;
+  }
+  
+  #reset-button {
+    grid-column: span 2;
+    padding: 10px;
+    font-size: 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #reset-button:hover {
+    background: #0056b3;
+  }
+  
