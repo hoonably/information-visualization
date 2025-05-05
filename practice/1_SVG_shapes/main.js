@@ -31,6 +31,7 @@ svg.append("ellipse")
   .attr("cy", 30)
   .attr("rx", 20)
   .attr("ry", 10)
+  .attr("transform", "rotate(45, 160, 30)")  // cx, cy를 기준으로 45도 회전
   .attr("fill", "purple");
 
 // ──────────── 선, 텍스트, 다각형 추가 ─────────────
@@ -56,8 +57,8 @@ svg.append("text")
 svg.append("polygon")
   .attr("points", "350,75 379,161 469,161 397,215 423,301 350,250 277,301 303,215 231,161 321,161")
   .attr("fill", "red")
-  .attr("stroke", "blue")
-  .attr("stroke-width", 3);
+  .attr("stroke", "blue")  // 테두리
+  .attr("stroke-width", 3);  // 테두리 두께
 
 // ⬡ Polygon (육각형 형태 예시)
 svg.append("polygon")
