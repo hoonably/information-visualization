@@ -14,11 +14,11 @@ UNIST CSE468 Information Visualization
 - [Source Code](https://github.com/hoonably/information-visualization/tree/main/excercise_2/)
 
 ### [Assignment2-1] Drawing Kirby with D3.js
-- [Demo](https://hoonably.github.io/information-visualization/assignment_2/1-1/)
+- [Demo](https://hoonably.github.io/information-visualization/assignment_2/1-1/assignment1-1)
 - [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_2/1-1/)
 
 ### [Assignment2-2] Data Processing with JavaScript 
-- [Demo](https://hoonably.github.io/information-visualization/assignment_2/1-2)
+- [Demo](https://hoonably.github.io/information-visualization/assignment_2/1-2/assignment1-2)
 - [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_2/1-2/)
   
 ### [Assignment3]
