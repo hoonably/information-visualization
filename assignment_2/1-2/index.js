@@ -26,7 +26,7 @@ const data = [
     { date: "2022-01-17", temperature: null },
 ];
 
-
+// 날짜 문자열을 date 객체로 변환, 온도를 
 parsedData = data.map(d => {
     return { date: d3.timeParse("%Y-%m-%d")(d.date), temperature: d.temperature }
 })
@@ -39,6 +39,9 @@ Your Code Starts here!!
 -------------------------------------------------
 */
 
+const filteredData = parsedData
+.filter(d => d.date !== null && d.temperature !== null)
+.sort((a, b) => a.date - b.date);
 
 /*
 -------------------------------------------------
@@ -47,6 +50,8 @@ Your Code Ends here!!
 
 -------------------------------------------------
 */
+
+
 
 var margin = { top: 20, right: 30, bottom: 30, left: 60 },
     width = 800 - margin.left - margin.right,
