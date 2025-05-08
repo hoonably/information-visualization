@@ -22,6 +22,67 @@ d3.csv('data/owid-covid-data.csv')
         -------------------------------------------
         */
 
+        /*
+        | 메서드         | 리턴                | 주 용도                              | 데이터 수정       |
+        | ----------- | ----------------- | --------------------------------- | ------------ |
+        | `map()`     | 새로운 배열            | 각 원소를 가공/변형해서 새 배열 만들기            | ✅            |
+        | `filter()`  | 조건 만족 원소만 남은 새 배열 | 특정 조건 필터링                         | ❌ 내부 수정 안 함  |
+        | `forEach()` | 없음 (`undefined`)  | 각 원소에 대해 부수 효과 수행 (값 수정, 콘솔 출력 등) | ✅ 객체 자체 수정 시 |
+        */
+        
+        // 1. 필요한 컬럼 중 null 값 제거
+        const processedData = data.map(d => ({  // map은 전처리(가공)
+            countrycode: d.iso_code,
+            location: d.location,
+            continent: d.continent,
+            date: new Date(d.date),
+            population: +d.population,
+            people_vaccinated: +d.people_vaccinated,
+            people_fully_vaccinated: +d.people_fully_vaccinated
+        }))
+            .filter(d =>
+                d.countrycode &&          // ISO 코드가 존재하고 (null/"" 방지)
+                d.location &&             // 국가 이름 존재
+                d.continent &&            // 대륙명 존재
+                !isNaN(d.population) &&   // 숫자 변환 실패한 경우 제거
+                !isNaN(d.partially) &&
+                !isNaN(d.fully) &&
+                d.population > 0          // 음수나 0 제거
+        );
+
+        // 2. continent가 아시아가 아닌거 제외
+        processedData = processedData.filter(d =>
+            // = 하나만 쓰면 값이 바뀌는 연산이 되어버림
+            d.continent === "Asia"
+        )
+        
+        // 3.  rate of fully vaccinated people, partially vaccinated people, and total rate of vaccinated people 계산하여 변수로 넣기
+        processedData.forEach(d => {  // foreach는 리턴값 없이 즉시 수정
+            d.fullyRate = d.people_fully_vaccinated / d.population * 100;
+            d.partialRate = (d.people_vaccinated - d.people_fully_vaccinated) / d.population * 100;
+            d.totalRate = d.fullyRate + d.partialRate;
+        });
+        
+        /*
+        processedData = processedData.map(d => ({
+            ...d,  // map을 쓸거면 이렇게 기존 필드 복사해줘야 함.
+            fullyRate: d.people_fully_vaccinated / d.population * 100,
+            partialRate: (d.people_vaccinated - d.people_fully_vaccinated) / d.population * 100,
+            totalRate: d.people_vaccinated / d.population * 100  // or fully + partial
+        }));
+        */
+
+        // 4. total rate of vaccinated people 이 100% 넘는거 삭제
+        processedData = processedData.filter(d=>
+            d.totalRate <= 100
+        );
+
+        // 5. 각 나라별 가장 최근의 데이터만 남김
+        processedData = processedData.rollups(
+            
+
+        )
+          
 
 
         /*
@@ -71,6 +132,7 @@ function drawBarChart(data) {
 
     // 1. Create a scale for x-axis
     // const xScale
+    // const xScale = 
 
     // 2. Create a scale for y-axis
     // const yScale

@@ -22,6 +22,12 @@ UNIST CSE468 Information Visualization
 - [Demo](https://hoonably.github.io/information-visualization/assignment_3)
 - [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_3/)
 
+```bash
+cd assignment_3
+npm install
+```
+Then you can see  at [http://localhost:3000](http://localhost:3000)
+
 ### [Excercise1] Chocolate Sales Visualization 
 <img src = "excercise_1/chocolate.png" height="200"/>
 
