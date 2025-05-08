@@ -19,7 +19,8 @@ UNIST CSE468 Information Visualization
 - [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_2/1-2/)
   
 ### [Assignment3]
-- [Demo](https://hoonably.github.io/information-visualization/assignment_3)
+<img src = "assignment_3/3.png" height="200"/>
+- There is no Demo because it use npm express server.
 - [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_3/)
 
 ```bash
