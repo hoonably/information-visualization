@@ -20,7 +20,7 @@ UNIST CSE468 Information Visualization
   
 ### [Assignment3]
 <img src = "assignment_3/3.png" height="200"/>
-- There is no Demo because it use npm express server.
+- There is no Demo because it use npm express server.  
 - [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_3/)
 
 ```bash
