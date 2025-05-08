@@ -25,6 +25,7 @@ UNIST CSE468 Information Visualization
 ```bash
 cd assignment_3
 npm install
+npm start
 ```
 Then you can see  at [http://localhost:3000](http://localhost:3000)
 
