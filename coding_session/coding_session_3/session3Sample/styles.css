@@ -1,0 +1,9 @@
+#barchartcontainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#charts {
+    display: flex;
+    flex-direction: row;
+}
