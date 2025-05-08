@@ -140,86 +140,86 @@ function drawBarChart(data) {
     */
 
     // 1. x축 스케일 생성
-    // - 백신 접종률은 0% ~ 100% 범위이므로 선형 스케일(linear scale) 사용
-    // - .domain([0, 100]) → 실제 데이터 범위
-    // - .range([0, width]) → 화면에 출력될 픽셀 위치 범위
-    const xScale = d3.scaleLinear().domain([0, 100]).range([0, width]);
+    // - 접종률은 0%~100%로 연속된 수이므로 선형 스케일(linear scale) 사용
+    const xScale = d3.scaleLinear()
+    .domain([0, 100])    // 데이터 입력 범위: 0% ~ 100%
+    .range([0, width]);  // 화면 출력 범위: 왼쪽(0) ~ 오른쪽 끝(width)
 
     // 2. y축 스케일 생성
-    // - 국가 이름이 범주형 데이터이므로 band scale 사용
-    // - 각 국가별로 막대 하나씩 그릴 수 있도록 .domain(data.map(...)) 설정
-    // - .range([0, height]) → 전체 그래프 높이에 균등 분포
-    // - .padding(0.1) → 막대 간 여백 추가
-    const yScale = d3
-    .scaleBand()
-    .domain(data.map((d) => d.location))
-    .range([0, height])
-    .padding(0.1);
+    // - 국가 이름은 범주형이므로 band scale 사용 (막대 간 간격 자동 조정)
+    const yScale = d3.scaleBand()
+    .domain(data.map((d) => d.location))  // 국가 이름 배열을 범주로 설정
+    .range([0, height])                   // 화면에서 위(0) ~ 아래(height)까지 배치
+    .padding(0.1);                        // 막대 사이 여백 설정 (10%)
 
     // 3. 색상 스케일 생성
-    // - 누적 막대에서 두 개의 항목을 구분할 색상 정의
-    // - 도메인: stacked bar의 key 값 (fully / partially 접종률)
-    // - range: 각 항목에 대응할 색상
+    // - 누적 막대 내부에서 항목별 색상을 구분하기 위해 ordinal scale 사용
     const cScale = d3.scaleOrdinal(
-    ["fully_vaccinated_rate", "partially_vaccinated_rate"],
-    ["#7bccc4", "#2b8cbe"] // 청록(완전접종), 파랑(부분접종)
+    ["fully_vaccinated_rate", "partially_vaccinated_rate"], // key 이름 기준
+    ["#7bccc4", "#2b8cbe"]                                   // 해당하는 색상 지정
+    // 청록 = 완전 접종률 / 파랑 = 부분 접종률
     );
 
-    // 4. 누적 막대 데이터 처리
-    // - d3.stack()을 통해 stacked 구조 생성
-    // - 각 항목의 시작점과 끝점 ([x0, x1]) 배열이 생성됨
-    // - data: [{ location, ... }] → [[ [x0,x1], [x0,x1], ... ], [...]]
-    const stackedData = d3
-    .stack()
-    .keys([
-        "fully_vaccinated_rate",
-        "partially_vaccinated_rate",
-    ])(data);
+    // 4. 누적 막대 데이터 생성
+    // - d3.stack()을 사용하여 각 key(접종률 항목)별로 누적된 위치 계산
+    const stackedData = d3.stack()
+    .keys(["fully_vaccinated_rate", "partially_vaccinated_rate"]) // 누적 항목 순서
+    (data); // 최종 입력 데이터로 스택 배열 생성
 
-    console.log(stackedData); // 구조 확인용 로그
+    console.log(stackedData); // 생성된 누적 구조 확인 (디버깅용)
 
-    // 5. 누적 막대 그리기
-    // - stackedData는 key별로 그룹화되어 있으므로 먼저 그룹(<g>) 생성
-    // - 각 그룹 안에 <rect> 막대를 순서대로 추가
+    // 5. 누적 막대 그리기 시작
+    // - stackedData는 항목(key)별로 그룹화되어 있으므로 key마다 <g> 요소를 만든다
     const group = svg
-    .selectAll("g")
-    .data(stackedData)
-    .join("g")
-    .attr("fill", (d) => cScale(d.key)); // 각 그룹별 색상 지정
+    .selectAll("g")         // 모든 <g> 요소 선택 (없으면 생성)
+    .data(stackedData)      // 각 key 그룹 데이터를 바인딩
+    .join("g")              // enter/update 병합
+    .attr("fill", (d) => cScale(d.key)); // 각 그룹에 대해 색상 지정 (key 기준)
 
+    // - 각 그룹 안에서 막대(rect) 개별 그리기
     group
-    .selectAll("rect")
-    .data((d) => d)
-    .join("rect")
-    .attr("y", (d) => yScale(d.data.location))                  // 국가별 y 위치
-    .attr("x", (d) => xScale(d[0]))                             // 시작점
-    .attr("width", (d) => xScale(d[1]) - xScale(d[0]))          // 길이 = 끝 - 시작
-    .attr("height", yScale.bandwidth());                        // 막대 높이
+    .selectAll("rect")        // 각 그룹 내 모든 rect 선택
+    .data((d) => d)           // 이 그룹에 속한 국가별 [x0, x1] 데이터 바인딩
+    .join("rect")             // enter/update 병합
+    .attr("y", (d) => yScale(d.data.location))           // y 위치: 해당 국가 이름의 위치
+    .attr("x", (d) => xScale(d[0]))                      // x 시작 위치: 누적 막대의 왼쪽 경계
+    .attr("width", (d) => xScale(d[1]) - xScale(d[0]))   // 폭: 오른쪽 끝 - 왼쪽 끝
+    .attr("height", yScale.bandwidth());                // 높이: yScale의 막대 높이값
 
-    // 6-1. 완전 접종률 라벨 표시
-    // - 각 막대의 끝에 텍스트로 백분율 출력
-    // - x: 막대 오른쪽에 정렬 (text-anchor: end)
-    svg
-    .selectAll("text.fully")
-    .data(data)
-    .join("text")
-    .attr("class", "fully")
-    .attr("x", (d) => xScale(d.fully_vaccinated_rate) - 5)
-    .attr("y", (d) => yScale(d.location) + yScale.bandwidth() / 2 + 3)
-    .text((d) => `${d.fully_vaccinated_rate.toFixed()}%`)
-    .style("font-size", "10px")
-    .style("text-anchor", "end");
 
+    // 6-1. 완전 접종률 라벨 표시 (fully vaccinated rate)
+    // - 각 막대의 오른쪽 끝에 숫자(%) 텍스트 표시
+    // - x: 막대 끝보다 살짝 왼쪽 (text-anchor: end로 정렬)
     svg
-        .selectAll("text.partially")
-        .data(data)
-        .join("text")
-        .attr("class", "partially")
-        .attr("x", (d) => xScale(d.people_vaccinated_rate) + 5)
-        .attr("y", (d) => yScale(d.location) + yScale.bandwidth() / 2 + 3)
-        .text((d) => `${d.partially_vaccinated_rate.toFixed()}%`)
-        .style("font-size", "10px")
-        .style("text-anchor", "start");
+    .selectAll("text.fully")                        // 이미 존재하는 .fully 클래스 선택 (없으면 생성됨)
+    .data(data)                                     // 현재 막대에 해당하는 데이터 바인딩
+    .join("text")                                   // enter + update 병합
+    .attr("class", "fully")                         // 라벨 구분을 위한 클래스 설정 (CSS 스타일링 가능)
+    .attr("x", (d) => xScale(d.fully_vaccinated_rate) - 5)  // 막대의 끝점보다 5px 왼쪽 위치 (퍼센트 수치 위치)
+    .attr("y", (d) => yScale(d.location) + yScale.bandwidth() / 2 + 3)  
+    // 막대 중앙 높이 + 약간 아래로 (세로 정렬)
+    .text((d) => `${d.fully_vaccinated_rate.toFixed()}%`)   // 소수점 없이 백분율 표시 (예: "81%")
+    .style("font-size", "10px")                    // 라벨 글자 크기 설정
+    .style("text-anchor", "end");                  // 텍스트 우측 정렬 (x 좌표 기준 오른쪽 끝 맞춤)
+
+
+    // 6-2. 부분 접종률 라벨 표시 (partially vaccinated rate)
+    // - 총 접종률 위치 오른쪽에 부분 접종률 텍스트 표시
+    // - x: 막대 끝보다 살짝 오른쪽 (text-anchor: start로 정렬)
+    svg
+    .selectAll("text.partially")                   // .partially 클래스 선택 (없으면 생성됨)
+    .data(data)                                     // 동일한 데이터 사용
+    .join("text")                                   // enter + update 병합
+    .attr("class", "partially")                     // 라벨 클래스 설정
+    .attr("x", (d) => xScale(d.people_vaccinated_rate) + 5) 
+    // 전체 막대 끝점 기준 오른쪽 5px 위치 (부분 접종률 수치 위치)
+    .attr("y", (d) => yScale(d.location) + yScale.bandwidth() / 2 + 3) 
+    // y 위치는 동일하게 막대 중앙 정렬
+    .text((d) => `${d.partially_vaccinated_rate.toFixed()}%`) 
+    // 부분 접종률을 정수로 출력 (예: "12%")
+    .style("font-size", "10px")                    // 글자 크기 설정
+    .style("text-anchor", "start");                // 텍스트 좌측 정렬 (x 좌표 기준 왼쪽에서 시작)
+
 
 
     /*
