@@ -52,17 +52,17 @@ d3.csv('data/owid-covid-data.csv')
         //   (2) 부분 접종률 (partially_vaccinated_rate) = 1회만 맞은 사람 비율
         //   (3) 총 접종률 (people_vaccinated_rate)
         processedData = processedData.map((d) => ({
-        ...d, // 원본 속성 유지
-        fully_vaccinated_rate: (d.people_fully_vaccinated / d.population) * 100,
-        partially_vaccinated_rate: ((d.people_vaccinated - d.people_fully_vaccinated) / d.population) * 100,
-        people_vaccinated_rate: (d.people_vaccinated / d.population) * 100,
+            ...d, // ⭐️  d 객체 안에 있는 기존 필드들 (iso_code, location, date, people_vaccinated, ...)을 그대로 복사해서 새 객체에 포함
+            fully_vaccinated_rate: (d.people_fully_vaccinated / d.population) * 100,  // 이후에 추가 필드 붙이기
+            partially_vaccinated_rate: ((d.people_vaccinated - d.people_fully_vaccinated) / d.population) * 100,
+            people_vaccinated_rate: (d.people_vaccinated / d.population) * 100,
         }));
         console.log(processedData); // 📌 비율 필드가 잘 추가되었는지 확인
 
         // 4. 총 접종률이 100%를 초과한 데이터 제거
         // - 데이터 오류 또는 중복 집계로 인해 100%를 초과할 수 있으므로 제거하여 시각화 왜곡 방지
         processedData = processedData.filter(
-        (d) => d.people_vaccinated_rate <= 100
+            (d) => d.people_vaccinated_rate <= 100
         );
         console.log(processedData); // 📌 이상치 제거 후 남은 국가 수 확인
 
@@ -70,12 +70,12 @@ d3.csv('data/owid-covid-data.csv')
         // - 여러 날짜가 존재할 수 있으므로 국가당 최신 데이터 1개만 사용
         let latestDataByCountry = {}; // iso_code 기준으로 최신 데이터 저장할 객체
         processedData.forEach((d) => {
-        const iso = d.iso_code;
-        const isExist = latestDataByCountry[iso];
-        // 기존 데이터가 없거나 현재 데이터의 날짜가 더 최신이면 교체
-        if (!isExist || latestDataByCountry[iso].date < d.date) {
-            latestDataByCountry[iso] = d;
-        }
+            const iso = d.iso_code;
+            const isExist = latestDataByCountry[iso];
+            // 기존 데이터가 없거나 현재 데이터의 날짜가 더 최신이면 교체
+            if (!isExist || latestDataByCountry[iso].date < d.date) {
+                latestDataByCountry[iso] = d;
+            }
         });
         processedData = Object.values(latestDataByCountry); // 객체에서 값만 뽑아 배열로 변환
         console.log(processedData); // 📌 국가당 1개만 남았는지 확인
@@ -83,7 +83,7 @@ d3.csv('data/owid-covid-data.csv')
         // 6. 총 접종률 기준으로 내림차순 정렬
         // - 막대그래프에서 위에서부터 접종률이 높은 순서대로 배치하기 위함
         processedData = processedData.sort(
-        (a, b) => b.people_vaccinated_rate - a.people_vaccinated_rate
+            (a, b) => b.people_vaccinated_rate - a.people_vaccinated_rate  // 내림차순
         );
         console.log(processedData); // 📌 정렬이 제대로 되었는지 확인
 
@@ -91,8 +91,6 @@ d3.csv('data/owid-covid-data.csv')
         // - 시각화 과제에서 "Top 15"만 시각화하도록 요구함
         processedData = processedData.slice(0, 15);
         console.log(processedData); // 📌 최종 시각화 대상 15개 국가 데이터 확인
-
-            
 
         /*
         -------------------------------------------
