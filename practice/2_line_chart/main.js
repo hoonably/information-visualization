@@ -23,19 +23,23 @@ const svg = d3.select("#chart")
 // 4. 스케일 정의
 // x축: 연도 (정수), y축: 기대수명
 const xScale = d3.scaleLinear()
-  .domain(d3.extent(data, d => d.year)) // [2000, 2020]
+  .domain(d3.extent(data, d => d.year)) // extent 사용하면 정렬 없이도 알아서 최소~최대 맞추기 [2000, 2020]
   .range([0, width]);
 
 const yScale = d3.scaleLinear()
   .domain([0, d3.max(data, d => d.value)]) // [0, 77.8]
-  .range([height, 0]); // y축은 값이 커질수록 위로 올라가야 하므로 반대로 설정
+  .range([height, 0]); // ⭐️ y축은 값이 커질수록 위로 올라가야 하므로 반대로 설정 ⭐️
 
 // 5. 축(axis) 생성 및 추가
-const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d")); // 연도 숫자 포맷
-const yAxis = d3.axisLeft(yScale);
+// .tickFormat(d3.format("d"));
+// 42.9 → "43", 5 → "5" 처럼 소수점 없이 정수로 반올림된 문자열로 출력
+// 사용 예: 축 눈금, 레이블 등에 정수 값만 출력하고 싶을 때
+const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));  // 축의 bottom에 글씨
+const yAxis = d3.axisLeft(yScale);  // 축의 left에 글씨
 
+// 실제로 추가
 svg.append("g")
-  .attr("transform", `translate(0, ${height})`) // x축을 아래쪽으로 옮김
+  .attr("transform", `translate(0, ${height})`)  // x축을 아래쪽으로 옮김
   .call(xAxis);
 
 svg.append("g")
@@ -49,19 +53,19 @@ const line = d3.line()
 // 7. 선 그래프 추가 (path 태그 사용)
 svg.append("path")
   .datum(data) // path는 단일 데이터 묶음에 대해 사용
-  .attr("fill", "none")
-  .attr("stroke", "#2b8cbe")
-  .attr("stroke-width", 2.5)
-  .attr("d", line); // 실제 선의 경로 (path의 d attribute)
+  .attr("fill", "none")  // 아래 stroke로 어차피 채우니까 이건 지움.
+  .attr("stroke", "#2b8cbe")  // stroke로 하면서 주어진 색 활용
+  .attr("stroke-width", 2.5)  // stroke 두께 조정 가능
+  .attr("d", line);  // 실제 선의 경로 (path의 d attribute)
 
 // 8. 데이터 점(circle) 추가
-svg.selectAll(".dot")
-  .data(data)
-  .enter()
-  .append("circle")
+svg.selectAll(".dot")  // 모든 .dot 요소 선택
+  .data(data)  // .dot과 data를 바인딩
+  .enter()  // ⭐️ 데이터는 있는데 요소가 없을 때 → 추가할 준비
+  .append("circle")  // 점 모양 circle
   .attr("class", "dot")
-  .attr("cx", d => xScale(d.year))
-  .attr("cy", d => yScale(d.value))
+  .attr("cx", d => xScale(d.year))  // 각 점의 중심 x좌표
+  .attr("cy", d => yScale(d.value))  // 각 점의 중심 y좌표
   .attr("r", 4)
   .attr("fill", "#7bccc4");
 
