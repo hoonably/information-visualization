@@ -6,56 +6,73 @@ UNIST CSE468 Information Visualization
 ## Contents
 
 ### [Assignment2-1] Drawing Kirby with D3.js
-<img src = "assignment_2/1-1/kirby.png" height="200"/>
+<img src = "assignment_2/1-1/image.png" height="300"/>
 
-- [Demo](https://hoonably.github.io/information-visualization/assignment_2/1-1/assignment1-1)  
-- [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_2/1-1/)
-
-<br>
-
-### [Assignment2-2] Data Processing with JavaScript 
-<img src = "assignment_2/1-2/1-2.png" height="200"/>
-
-- [Demo](https://hoonably.github.io/information-visualization/assignment_2/1-2/assignment1-2)
-- [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_2/1-2/)
+* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_2/1-1/)
+* 📌 [Live Demo](https://hoonably.github.io/information-visualization/assignment_2/1-2/assignment1-1)
 
 <br>
 
-### [Assignment3] a stacked bar chart about vaccination rates of the Top 15 countries in Asia
-<img src = "assignment_3/3.png" height="200"/>
+### [Assignment 2-2] Data Processing with JavaScript
+<img src="assignment_2/1-2/image.png" height="300"/>
 
-- There is no Demo because it use npm express server.
-- [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_3/)
+* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_2/1-2/)
+* 📌 [Live Demo](https://hoonably.github.io/information-visualization/assignment_2/1-2/assignment1-2)
+
+<br>
+
+### [Assignment 3] Stacked Bar Chart of Vaccination Rates in Top 15 Asian Countries
+
+<img src="assignment_3/image.png" height="300"/>
+
+* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_3/)
+* 📌 No live demo available because this project requires a local development server using Node.js and Express.
+
+To run locally:
 
 ```bash
+# Navigate to the project directory
 cd assignment_3
+# Install dependencies
 npm install
+# Start the development server
 npm start
 ```
-Then you can see  at [http://localhost:3000](http://localhost:3000)
+
+Then open your browser and visit [http://localhost:3000](http://localhost:3000) to view the visualization.
 
 <br>
 
 ### [Excercise1] Chocolate Sales Visualization 
-<img src = "excercise_1/chocolate.png" height="200"/>
+<img src = "excercise_1/image.png" height="300"/>
 
-- [Demo](https://hoonably.github.io/information-visualization/excercise_1/)
-- [Source Code](https://github.com/hoonably/information-visualization/tree/main/excercise_1/)
+* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/excercise_1/)
+* 📌 [Live Demo](https://hoonably.github.io/information-visualization/excercise_1/)
 
 <br>
 
 ### [Excercise2] Connected Multi-View Dashboard
-- [Demo](https://hoonably.github.io/information-visualization/excercise_2/)
-- [Source Code](https://github.com/hoonably/information-visualization/tree/main/excercise_2/)
+* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_3/)
+* 📌 You can see locally by Node.js [http://localhost:3000](http://localhost:3000)
 
 <br>
 
-### [Midterm] 
-- [Demo]()
-- [Source Code]()
+### [Midterm1] Fix the Errors in the Multiple-Line Chart implementation
+<img src = "Midterm/Prob1/image.png" height="300"/>
+
+* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_3/)
+* 📌 You can see locally by Node.js [http://localhost:3000](http://localhost:3000)
 
 <br>
 
-### [Final] 
+### [Midterm2] Drawing Bubble Chart
+<img src = "Midterm/Prob2/image.png" height="300"/>
+
+* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_3/)
+* 📌 You can see locally by Node.js [http://localhost:3000](http://localhost:3000)
+
+<br>
+
+<!-- ### [Final] 
 - [Demo]()
-- [Source Code]()
+- [Source Code]() -->
