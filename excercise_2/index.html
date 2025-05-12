@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Chocolate Sales Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Connected Multi-View Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
+  <h1>Connected Multi-View Dashboard</h1>
 
   <div id="dashboard">
-    <div id="area-chart"></div>
-    <div id="bar-chart"></div>
-    <div id="context-chart"></div>
-    <div id="datatable"></div>
-    <button id="reset-button">Reset</button>
+    <div id="charts">
+      <div id="area-chart"></div>
+      <button id="reset-btn">Reset Filters</button>
+      <br><br><br>
+      <div id="bar-chart"></div>
+      <button id="reset-btn">Reset Filters</button>
+      <br><br><br>
+      <div id="datatable"></div>
+      <button id="reset-btn">Reset Filters</button>
+    </div>
   </div>
 
-  <script src="script.js"></script>
+
+  <script src="main.js"></script>
 </body>
 </html>

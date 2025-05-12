@@ -52,15 +52,17 @@ Then open your browser and visit [http://localhost:3000](http://localhost:3000) 
 <br>
 
 ### [Excercise2] Connected Multi-View Dashboard
-* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_3/)
-* 📌 You can see locally by Node.js [http://localhost:3000](http://localhost:3000)
+<img src = "excercise_2/image.png" height="500"/>
+
+* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/excercise_2/)
+* 📌 [Live Demo](https://hoonably.github.io/information-visualization/excercise_2)
 
 <br>
 
 ### [Midterm1] Fix the Errors in the Multiple-Line Chart implementation
 <img src = "Midterm/Prob1/image.png" height="300"/>
 
-* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_3/)
+* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/Midterm/Prob1/)
 * 📌 You can see locally by Node.js [http://localhost:3000](http://localhost:3000)
 
 <br>
@@ -68,7 +70,7 @@ Then open your browser and visit [http://localhost:3000](http://localhost:3000) 
 ### [Midterm2] Drawing Bubble Chart
 <img src = "Midterm/Prob2/image.png" height="300"/>
 
-* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_3/)
+* 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/Midterm/Prob2/)
 * 📌 You can see locally by Node.js [http://localhost:3000](http://localhost:3000)
 
 <br>
