@@ -10,17 +10,15 @@
   <h1>Connected Multi-View Dashboard</h1>
 
   <div id="dashboard">
-    <div id="charts">
-      <div id="area-chart"></div>
-      <button id="reset-btn">Reset Filters</button>
-      <br><br><br>
-      <div id="bar-chart"></div>
-      <button id="reset-btn">Reset Filters</button>
-      <br><br><br>
-      <div id="datatable"></div>
-      <button id="reset-btn">Reset Filters</button>
+    <div id="top-row" style="display: flex; gap: 10px;">
+      <div id="area-chart" style="flex: 1;"></div>
+      <div id="bar-chart" style="flex: 1;"></div>
     </div>
+    <button id="reset-btn">Reset Filters</button>
+
+    <div id="datatable" style="margin-top: 40px;"></div>
   </div>
+
 
 
   <script src="main.js"></script>

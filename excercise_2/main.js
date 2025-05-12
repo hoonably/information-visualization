@@ -56,8 +56,8 @@ function initAreaChart(data) {
   monthlyData.sort((a, b) => a[0] - b[0]);
 
   const margin = { top: 50, right: 20, bottom: 80, left: 60 };
-  const width = 800 - margin.left - margin.right;
-  const height = 300 - margin.top - margin.bottom;
+  const width = 600 - margin.left - margin.right;
+  const height = 400 - margin.top - margin.bottom;
   const contextHeight = 60;
 
   const container = d3.select("#area-chart");
@@ -173,7 +173,7 @@ function initBarChart(data) {
   productSales.sort((a, b) => b[1] - a[1]);
 
   const margin = { top: 50, right: 30, bottom: 80, left: 80 };
-  const width = 800 - margin.left - margin.right;
+  const width = 600 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
 
   const container = d3.select("#bar-chart");
