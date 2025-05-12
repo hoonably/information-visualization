@@ -9,7 +9,7 @@ UNIST CSE468 Information Visualization
 <img src = "assignment_2/1-1/image.png" height="300"/>
 
 * 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_2/1-1/)
-* 📌 [Live Demo](https://hoonably.github.io/information-visualization/assignment_2/1-2/assignment1-1)
+* 📌 [Live Demo](https://hoonably.github.io/information-visualization/assignment_2/1-1/assignment1-1)
 
 <br>
 
