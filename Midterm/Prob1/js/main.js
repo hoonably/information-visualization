@@ -30,7 +30,7 @@ d3.csv('data/life_expectancy_by_country.csv')
         }
 
         // Sort & Slice based on the difference
-        ///////////// ✅ a, b 순서 바뀜 /////////////////
+        //! ✅ a, b 순서 바뀜
         // var differnece_list = differnece_list.sort((a, b) => a.difference - b.difference).slice(0, 5);
         var differnece_list = differnece_list.sort((a, b) => b.difference - a.difference).slice(0, 5);
 
@@ -65,7 +65,7 @@ function drawLineChart(data) {
     const xScale = d3.scaleLinear().domain(d3.extent(data, d => d.year)).range([0, width])
 
     // Create a scale for y-axis
-    ///////////// ✅ range를 위가 0, 아래가 height로 y축 설정 /////////////////
+    //! ✅ range를 위가 0, 아래가 height로 y축 설정
     // const yScale = d3.scaleLinear().domain([0, d3.max(data, d => d.value)]).range([0, height])
     const yScale = d3.scaleLinear().domain([0, d3.max(data, d => d.value)]).range([height, 0])
 
@@ -76,7 +76,7 @@ function drawLineChart(data) {
     // Draw axes 
     const xAxisGroup = svg.append("g")
         .attr('class', 'x-axis')
-        ///////////// ✅ (추가) x축 아래로 위치 조정 (2번 문제에 나옴) /////////////////
+        //! ✅ (추가) x축 아래로 위치 조정 (2번 문제에 나옴)
         .attr('transform', `translate(0, ${height})`)
         .call(xAxis);
 
@@ -100,7 +100,7 @@ function drawLineChart(data) {
         .enter()
         .append('path')
         .attr('fill', 'none')
-        ///////////// ✅ stroke가 black으로 안보였었음 /////////////////
+        //! ✅ stroke가 black으로 안보였었음
         // .attr('stroke', 'black')
         .attr('stroke', d => cScale(d[0]))
         .attr('stroke-width', 1.5)

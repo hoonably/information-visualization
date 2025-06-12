@@ -16,7 +16,7 @@ d3.csv('data/owid-covid-data.csv')
         -------------------------------------------
         */
 
-        // 1. Exclude data that contain missing values on columns you need
+        //! 1. Exclude data that contain missing values on columns you need
         var processedData = data.filter(d => {
             return d.continent && d.location && d.date && d.population && d.life_expectancy && d.gdp_per_capita
         })
@@ -34,7 +34,7 @@ d3.csv('data/owid-covid-data.csv')
             }
         })
 
-        // 2. Exclude all data except the latest data for each country
+        //! 2. Exclude all data except the latest data for each country
         let latestDataByCountry = {}; // 국가 기준으로 최신 데이터 저장할 객체
         processedData.forEach((d) => {
             // 기존 데이터가 없거나 현재 데이터의 날짜가 더 최신이면 교체
@@ -45,7 +45,7 @@ d3.csv('data/owid-covid-data.csv')
         processedData = Object.values(latestDataByCountry); // 객체에서 값만 뽑아 배열로 변환
         console.log(processedData)  // 왜 이전꺼하면 얘도 정렬되지?
 
-        // 3. Sort the data by the life expectancy
+        //! 3. Sort the data by the life expectancy
         processedData = processedData.sort((a, b) => b.life_expectancy - a.life_expectancy)
         console.log(processedData)
 
@@ -94,38 +94,38 @@ function drawBubbleChart(data) {
     -------------------------------------------
     */
 
-    // 1. Define a scale named xScale for x-axis
+    //! 1. Define a scale named xScale for x-axis
     // You should set the x-axis range from 0 to 110% of the highest GDP Per Capita with evenly spaced ticks.
     const xScale = d3.scaleLinear()
         .domain([0, d3.max(data, d=>d.gdp_per_capita) * 1.1])  // 최대값의 110%
         .range([0, width])
 
-    // 2. Define a scale named yScale for y-axis
+    //! 2. Define a scale named yScale for y-axis
     // You should set the y-axis range from 90% of the lowest life expectancy to 110% of the highest life expectancy with evenly spaced ticks.
     const yScale = d3.scaleLinear()
         .domain([d3.min(data, d=>d.life_expectancy) * 0.9, d3.max(data, d=>d.life_expectancy) * 1.1])
         .range([height, 0])
 
-    // 3. Define a list named continentList that contains
+    //! 3. Define a list named continentList that contains
     // Make sure that the order of the continent follows the order it appears in the dataset. 
     // e.g.) If continent values in dataset appear like [Asia, Asia, Europe, Asia, Africa, Europe, Europe, Asia, Africa], the continentList must be [Asia, Europe, Africa]
     const continentList = [...new Set(data.map(d=>d.continent))];  // Set 사용
 
-    // 4. Define a scale named cScale for color
+    //! 4. Define a scale named cScale for color
     // Color the bubbles differently depending on the continent with the color palette:
     // ['#cce1f2', '#a6f8c5', '#fbf7d5', '#e9cec7', '#f59dae', '#d2bef1']  
     const cScale = d3.scaleOrdinal()
         .domain(continentList)
         .range(['#cce1f2', '#a6f8c5', '#fbf7d5', '#e9cec7', '#f59dae', '#d2bef1'])
 
-    // 5. Define a scale named sScale for size of the bubbles
+    //! 5. Define a scale named sScale for size of the bubbles
     // Your bubble’s radius should range from 5 to 50.
     // And your bubble’s area must be proportional to the population of the country.
     const sScale = d3.scaleSqrt()
         .domain(d3.extent(data, d=>d.population))
         .range([5, 50])  // 최소 -> 5px, 최대 -> 50px 반지름으로 매핑되게끔
 
-    // 6. Draw Bubbles
+    //! 6. Draw Bubbles
     // svg가 const이므로 수정불가해서 bubble로 그리기
     bubble = svg.append('g')
         .selectAll("dot")
