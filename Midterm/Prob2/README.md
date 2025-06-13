@@ -1,5 +1,5 @@
 ## [Midterm 2] Drawing Bubble Chart
-<img src = "Midterm/Prob2/image.png" style="max-width: 100%; max-height: 500px; width: auto; height: auto; display: block; margin: auto;">
+<img src="image.png" style="max-width: 100%; max-height: 500px; width: auto; height: auto; display: block; margin: auto;"/>
 
 * 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/Midterm/Prob2/)
 * 📌 No live demo available because this project requires a local development server using Node.js and Express.
