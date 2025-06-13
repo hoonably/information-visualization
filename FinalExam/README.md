@@ -1,7 +1,7 @@
 ## [FinalExam] Implement Dropdown and Focus+Context line chart with Brush interaction
-<img src = "ans1.PNG" style="max-width: 100%; max-height: 500px; width: auto; height: auto; display: block; margin: auto;"/>
+<img src = "ans1.PNG" width="100%" style="max-width: 600px;"/>
 <br>
-<img src = "ans2.PNG" style="max-width: 100%; max-height: 500px; width: auto; height: auto; display: block; margin: auto;"/>
+<img src = "ans2.PNG" width="100%" style="max-width: 600px;"/>
 
 * 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/FinalExam/)
 * 📌 No live demo available because this project requires a local development server using Node.js and Express.

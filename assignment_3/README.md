@@ -1,6 +1,6 @@
 ## [Assignment 3] Stacked Bar Chart of Vaccination Rates in Top 15 Asian Countries
 
-<img src="image.png" style="max-width: 100%; max-height: 500px; width: auto; height: auto; display: block; margin: auto;"/>
+<img src="image.png" width="100%" style="max-width: 600px;"/>
 
 * 🧾 [Source Code](https://github.com/hoonably/information-visualization/tree/main/assignment_3/)
 * 📌 No live demo available because this project requires a local development server using Node.js and Express.
